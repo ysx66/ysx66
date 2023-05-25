@@ -25,6 +25,9 @@ You can click the Preview link to take a look at your changes.
 <a href="https://github.com/ysx66/Phicomm-N1">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=ysx66&repo=Phicomm-N1&theme=vue" />
 </a>
+<a href="https://github.com/ysx66/flippy-openwrt-actions">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=ysx66&repo=flippy-openwrt-actions&theme=transparent" />
+</a>
 <a href="https://github.com/ysx66/kernel">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=ysx66&repo=kernel&theme=transparent" />
 </a>
