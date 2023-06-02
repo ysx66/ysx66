@@ -34,8 +34,8 @@ You can click the Preview link to take a look at your changes.
 <a href="https://github.com/xx456/Actions-OpenWrt">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=xx456&repo=Actions-OpenWrt&theme=transparent" />
 </a>
-<a href="https://github.com/xx456/Actions-OpenWrt-Amlogic">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=xx456&repo=Actions-OpenWrt-Amlogic&theme=transparent" />
+<a href="https://github.com/xx456/Actions_OpenWrt-Amlogic">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=xx456&repo=Actions_OpenWrt-Amlogic&theme=transparent" />
 </a>
 <a href="https://github.com/xx456/free">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=xx456&repo=free&theme=transparent" />
