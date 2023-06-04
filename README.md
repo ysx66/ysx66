@@ -40,6 +40,3 @@ You can click the Preview link to take a look at your changes.
 <a href="https://github.com/xx456/free">
   <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=xx456&repo=free&theme=transparent" />
 </a>
-<a href="https://github.com/xx456/getNode">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=xx456&repo=getNode&theme=flag-india" />
-</a>
