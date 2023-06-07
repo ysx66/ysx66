@@ -40,11 +40,11 @@ jobs:
         rm -rf ./passwall/pdnsd-alt
         rm -rf ./openwrt/luci
         rm -rf ./openwrt/packages
-        mkdir -p ./openwrt/luci
-        mkdir -p ./openwrt/luci/applications
-        mkdir -p ./openwrt/packages
-        mv -f ./passwall1/luci-app-passwall ./openwrt/luci/applications/luci-app-passwall
-        mv -f ./passwall2/luci-app-passwall2 ./openwrt/luci/applications/luci-app-passwall2
+        mkdir -p ./luci
+        mkdir -p ./luci/applications
+        mkdir -p ./packages
+        mv -f ./passwall1/luci-app-passwall ./luci/applications/luci-app-passwall
+        mv -f ./passwall2/luci-app-passwall2 ./luci/applications/luci-app-passwall2
         mv -f ./passwall/* ./packages/
     - name: 上传仓库
       run: |
