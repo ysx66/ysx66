@@ -46,8 +46,6 @@ jobs:
         mv -f ./passwall1/luci-app-passwall ./openwrt/luci/applications/luci-app-passwall
         mv -f ./passwall2/luci-app-passwall2 ./openwrt/luci/applications/luci-app-passwall2
         mv -f ./passwall/* ./openwrt/packages/
-        mkdir -p ./openwrt/luci/applications/luci-app-rebootschedule
-        mv -f ./rebootschedule/* ./openwrt/luci/applications/luci-app-rebootschedule/
     - name: 上传仓库
       run: |
         echo "上传我的仓库"
