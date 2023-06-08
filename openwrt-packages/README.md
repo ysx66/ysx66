@@ -11,6 +11,10 @@
 
  自动同步上游源码，一键拉取直接编译，不用再一个个找插件
 
+ 本人所有编译的固件默认都是纯净极简版，只编译了openclash插件
+   
+ 如需其他科学上网插件，可以拉取我另一个仓库 [helloworld-passwall](https://github.com/ysx88/helloworld-passwall) 
+   
  所有插件都为 GITHUB 上收集的开源插件，感谢作者们的付出
 
 ### 插件说明
@@ -18,7 +22,6 @@
 | ------------- | ------------- |
 | helloworld | SSR Plus+ 插件依赖 |
 | openwrt-passwall | PassWall 插件依赖 |
-| luci-app-adbyby-plus | 广告屏蔽大师Plus +|
 | luci-app-adguardhome | AdGuard Home 广告过滤 |
 | luci-app-amlogic | 晶晨宝盒 |
 | luci-app-argon-config | Argon 主题设置，需搭配 Argon 主题使用 |
