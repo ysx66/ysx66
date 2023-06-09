@@ -37,6 +37,7 @@ jobs:
         svn export https://github.com/coolsnowwolf/lede/trunk/ ./lede
         svn export https://github.com/coolsnowwolf/luci/trunk/ ./luci
         svn export https://github.com/ysx88/ysx88/trunk/ ./ysx88
+        svn export https://github.com/ysx88/shuoming/trunk/ ./shuoming
       
     - name: Commit
       run: |
