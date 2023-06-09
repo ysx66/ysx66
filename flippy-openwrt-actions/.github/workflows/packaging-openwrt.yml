@@ -156,7 +156,7 @@ jobs:
         with:
           name: R${{ env.DATE }} 🚫 ${{ env.FILE_NAME }} 固件
           allowUpdates: true
-          removeArtifacts: false
+          removeArtifacts: true
           replacesArtifacts: true
           tag: ${{ env.FILE_NAME }}
           token: ${{ secrets.GH_TOKEN }}

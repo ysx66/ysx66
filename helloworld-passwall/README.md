@@ -5,4 +5,4 @@
 
 # ***仅供于学习，方便编译***
 
-# ❀[helloworld](https://github.com/fw876/helloworld)❀[passwall](https://github.com/xiaorouji/openwrt-passwall/tree/packages)❀依赖
+# ❀[helloworld](https://github.com/fw876/helloworld)❀[passwall](https://github.com/xiaorouji/openwrt-passwall/tree/packages)❀插件与依赖
