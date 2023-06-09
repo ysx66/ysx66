@@ -41,10 +41,9 @@ on:
       openwrt_kernel:
         description: "Select kernel version"
         required: false
-        default: "5.4.1_5.10.1_5.15.1_6.1.1"
+        default: "5.15.1_6.1.1"
         type: choice
         options:
-          - 5.4.1_5.10.1_5.15.1_6.1.1
           - 5.4.1_5.10.1
           - 5.15.1_6.1.1
           - 5.4.1
@@ -54,10 +53,10 @@ on:
       kernel_repo:
         description: "Set the kernel repository"
         required: false
-        default: "breakings/OpenWrt"
+        default: "ysx88/OpenWrt"
         type: choice
         options:
-          - breakings/OpenWrt
+          - ysx88/OpenWrt
       auto_kernel:
         description: "Auto use the latest kernel"
         required: false
