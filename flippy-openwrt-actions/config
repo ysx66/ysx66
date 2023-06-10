@@ -1582,7 +1582,6 @@ CONFIG_PACKAGE_dnsmasq_full_dhcp=y
 # CONFIG_PACKAGE_dnsmasq_full_dnssec is not set
 # CONFIG_PACKAGE_dnsmasq_full_auth is not set
 CONFIG_PACKAGE_dnsmasq_full_ipset=y
-# CONFIG_PACKAGE_dnsmasq_full_nftset is not set
 # CONFIG_PACKAGE_dnsmasq_full_conntrack is not set
 # CONFIG_PACKAGE_dnsmasq_full_noid is not set
 # CONFIG_PACKAGE_dnsmasq_full_broken_rtc is not set
@@ -4514,6 +4513,7 @@ CONFIG_MBEDTLS_ECP_DP_CURVE25519_ENABLED=y
 #
 # Build Options - unselect features to reduce binary size
 #
+CONFIG_MBEDTLS_ARMV8CE_AES_C=y
 # CONFIG_MBEDTLS_CERTS_C is not set
 # CONFIG_MBEDTLS_CIPHER_MODE_OFB is not set
 # CONFIG_MBEDTLS_CIPHER_MODE_XTS is not set
@@ -4589,7 +4589,6 @@ CONFIG_AFALG_FALLBACK=y
 CONFIG_AFALG_UPDATE_CTR_IV=y
 # CONFIG_AFALG_ZERO_COPY is not set
 CONFIG_PACKAGE_libopenssl-conf=y
-# CONFIG_PACKAGE_libopenssl-devcrypto is not set
 # CONFIG_PACKAGE_libopenssl-gost_engine is not set
 # CONFIG_PACKAGE_libpolarssl is not set
 # CONFIG_PACKAGE_libwolfssl is not set
@@ -5300,7 +5299,7 @@ CONFIG_PACKAGE_luci-app-amlogic=y
 # CONFIG_PACKAGE_luci-app-amule is not set
 # CONFIG_PACKAGE_luci-app-ap-modem is not set
 CONFIG_PACKAGE_luci-app-argon-config=y
-CONFIG_PACKAGE_luci-app-aria2=y
+# CONFIG_PACKAGE_luci-app-aria2 is not set
 CONFIG_PACKAGE_luci-app-arpbind=y
 # CONFIG_PACKAGE_luci-app-asterisk is not set
 # CONFIG_PACKAGE_luci-app-attendedsysupgrade is not set
@@ -5349,7 +5348,7 @@ CONFIG_PACKAGE_luci-app-cupsd=y
 CONFIG_PACKAGE_luci-app-ddns=y
 CONFIG_PACKAGE_luci-app-ddns-go=y
 CONFIG_PACKAGE_luci-app-ddnsto=y
-# CONFIG_PACKAGE_luci-app-design-config is not set
+CONFIG_PACKAGE_luci-app-design-config=y
 # CONFIG_PACKAGE_luci-app-diag-core is not set
 CONFIG_PACKAGE_luci-app-diskman=y
 CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
@@ -5605,7 +5604,6 @@ CONFIG_PACKAGE_luci-app-uhttpd=y
 CONFIG_PACKAGE_luci-app-unblockmusic=y
 CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_Go=y
 CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_NodeJS=y
-# CONFIG_PACKAGE_luci-app-unblockneteasemusic is not set
 # CONFIG_PACKAGE_luci-app-unbound is not set
 # CONFIG_PACKAGE_luci-app-unifi is not set
 # CONFIG_PACKAGE_luci-app-unishare is not set
@@ -5656,7 +5654,7 @@ CONFIG_PACKAGE_luci-theme-argon=y
 # CONFIG_PACKAGE_luci-theme-argon-mod is not set
 # CONFIG_PACKAGE_luci-theme-atmaterial_new is not set
 # CONFIG_PACKAGE_luci-theme-bootstrap is not set
-# CONFIG_PACKAGE_luci-theme-design is not set
+CONFIG_PACKAGE_luci-theme-design=y
 CONFIG_PACKAGE_luci-theme-edge=y
 # CONFIG_PACKAGE_luci-theme-ifit is not set
 # CONFIG_PACKAGE_luci-theme-material is not set
@@ -5734,11 +5732,6 @@ CONFIG_PACKAGE_luci-i18n-amlogic-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-argon-config-es is not set
 CONFIG_PACKAGE_luci-i18n-argon-config-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-argon-config-zh_Hans is not set
-# CONFIG_PACKAGE_luci-i18n-aria2-pt-br is not set
-# CONFIG_PACKAGE_luci-i18n-aria2-ru is not set
-# CONFIG_PACKAGE_luci-i18n-aria2-sv is not set
-CONFIG_PACKAGE_luci-i18n-aria2-zh-cn=y
-# CONFIG_PACKAGE_luci-i18n-aria2-zh-tw is not set
 CONFIG_PACKAGE_luci-i18n-arpbind-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-autoreboot-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-autoupdate-zh-cn=y
@@ -5838,6 +5831,8 @@ CONFIG_PACKAGE_luci-i18n-ddns-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-ddns-zh-tw is not set
 CONFIG_PACKAGE_luci-i18n-ddnsto-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-ddnsto-zh_Hans is not set
+CONFIG_PACKAGE_luci-i18n-design-config-zh-cn=y
+# CONFIG_PACKAGE_luci-i18n-design-config-zh_Hans is not set
 CONFIG_PACKAGE_luci-i18n-diskman-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-diskman-zh-tw is not set
 CONFIG_PACKAGE_luci-i18n-dnsfilter-zh-cn=y
@@ -8451,4 +8446,4 @@ CONFIG_PACKAGE_watchcat=y
 # end of Font-Utils
 # end of Xorg
 
-CONFIG_OVERRIDE_PKGS="UnblockNeteaseMusic UnblockNeteaseMusic-Go adguardhome aliyundrive-fuse aliyundrive-webdav amule aria2 ariang baidupcs-web cgroupfs-mount coremark ddns-scripts dnsforwarder dnsproxy dockerd gmediarender go-aliyundrive-webdav gowebdav haproxy luci-app-aliyundrive-fuse luci-app-aliyundrive-webdav luci-app-argon-config luci-app-autoreboot luci-app-baidupcs-web luci-app-design-config luci-app-dockerman luci-app-easymesh luci-app-guest-wifi luci-app-ipsec-server luci-app-kodexplorer luci-app-netdata luci-app-nft-qos luci-app-pppoe-relay luci-app-pptp-server luci-app-pushbot luci-app-ramfree luci-app-serverchan luci-app-socat luci-app-softethervpn luci-app-verysync luci-app-watchcat luci-app-xlnetacc luci-lib-ipkg luci-theme-design miniupnpd msd_lite msmtp mwan3 netdata nft-qos nginx nps pdnsd-alt qBittorrent qBittorrent-static qtbase qttools rblibtorrent rp-pppoe shadowsocks-libev smartdns sms-tool tailscale tcpping transmission-web-control uugamebooster uwsgi v2dat verysync watchcat wxbase"
+CONFIG_OVERRIDE_PKGS="UnblockNeteaseMusic UnblockNeteaseMusic-Go adguardhome aliyundrive-fuse aliyundrive-webdav amule aria2 ariang baidupcs-web cgroupfs-mount coremark ddns-scripts dnsforwarder dnsproxy dockerd gmediarender go-aliyundrive-webdav gowebdav haproxy luci-app-aliyundrive-fuse luci-app-aliyundrive-webdav luci-app-argon-config luci-app-autoreboot luci-app-baidupcs-web luci-app-design-config luci-app-dockerman luci-app-easymesh luci-app-guest-wifi luci-app-ipsec-server luci-app-kodexplorer luci-app-mosdns luci-app-netdata luci-app-nft-qos luci-app-pppoe-relay luci-app-pptp-server luci-app-pushbot luci-app-ramfree luci-app-serverchan luci-app-socat luci-app-softethervpn luci-app-verysync luci-app-watchcat luci-app-xlnetacc luci-lib-ipkg luci-theme-design miniupnpd mosdns msd_lite msmtp mwan3 netdata nft-qos nginx nps pdnsd-alt qBittorrent qBittorrent-static qtbase qttools rblibtorrent rp-pppoe shadowsocks-libev smartdns sms-tool tailscale tcpping transmission-web-control uugamebooster uwsgi v2dat v2ray-geodata verysync watchcat wxbase"
