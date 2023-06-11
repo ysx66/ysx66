@@ -13,7 +13,6 @@ env:
   CONFIG_FILE: config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
-  UPLOAD_CONFIG: false
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
   FILE_NAME: ARMv8_ROOTFS
@@ -164,13 +163,6 @@ jobs:
         mkdir -p ./artifact/buildinfo
         cp -rf openwrt/.config ./artifact/buildinfo/armv8.config
         cp -rf $(find openwrt/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
-
-    - name: Upload config 
-      uses: actions/upload-artifact@main
-      if: env.UPLOAD_CONFIG == 'true' && steps.compile.outputs.status == 'success'
-      with:
-        name: armv8-config
-        path: ./artifact/buildinfo/
 
     - name: Organize files
       id: organize

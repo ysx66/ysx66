@@ -6,7 +6,7 @@ inputs:
   build_target:
     description: "Select build target: armbian / kernel"
     required: false
-    default: "armbian"
+    default: "kernel"
   # For build armbian -----
   armbian_path:
     description: "Set Armbian file path."
