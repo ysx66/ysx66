@@ -17,10 +17,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@main
       
-    - name: SSH connection to Actions
-      uses: P3TERX/ssh2actions@v1.0.0
-      if: (github.event.inputs.SSH == 'true' || github.event.inputs.SSH  == '1') 
-      
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -32,10 +28,11 @@ jobs:
       
     - name: Commit
       run: |
-        git config --global user.email 115683308@qq.com
+        Emoji=("🎉" "🤞" "✨" "🎁" "🎈" "🎄" "🎨" "💋" "🍓" "🍕" "🍉" "💐" "🌴" "🚀" "🛸" "🗽" "⛅" "🌈" "🔥" "⛄" "🐶" "🏅" "🦄" "🐤")
+        git config --global user.email yushuangxivip@gmail.com
         git config --global user.name ysx88
         git add .
-        git commit -m"action:`date`"
+        git commit -m "${Emoji[$[$RANDOM % ${#Emoji[@]}]]} Sync $(date +%Y-%m-%d" "%H:%M:%S)"
         git pull --rebase
         
     - name: Push changes
