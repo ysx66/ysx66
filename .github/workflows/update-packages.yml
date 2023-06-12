@@ -26,7 +26,6 @@ jobs:
         git clone https://github.com/NueXini/NueXini_Packages -b main --single-branch packages
         cd packages
         rm -rf *
-        rm -rfv !(README.md|packages.sh)
         bash $GITHUB_WORKSPACE/packages.sh
 
     - name: Upload packages
