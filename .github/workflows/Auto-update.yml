@@ -30,7 +30,7 @@ jobs:
         rm -rfv *
         svn export https://github.com/ysx88/compile-kernel/trunk/ ./compile-kernel
         svn export https://github.com/ysx88/flippy-openwrt-actions/trunk/ ./flippy-openwrt-actions
-        svn export https://github.com/ysx88/helloworld-passwall/trunk/ ./helloworld-passwall
+        svn export https://github.com/ysx88/openwrt-packages/trunk/ ./openwrt-packages
         svn export https://github.com/ysx88/my-packages/trunk/ ./my-packages
         svn export https://github.com/ysx88/OpenWrt/trunk/ ./OpenWrt
         svn export https://github.com/ysx88/ysx88/trunk/ ./ysx88
