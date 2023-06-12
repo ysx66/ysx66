@@ -35,7 +35,7 @@ jobs:
         git add .
         Emoji=("🎉" "✨" "🎁" "🎈" "🎄" "🍓" "🍕" "🍉" "🌴" "🚀" "⛅" "🌈" "❤️")
         git commit -m "${Emoji[$[$RANDOM % ${#Emoji[@]}]]}update at $(TZ='Asia/Shanghai' date +%Y-%m-%d)${Emoji[$[$RANDOM % ${#Emoji[@]}]]}"
-        git push --quiet "https://${{ secrets.TOKEN }}@github.com/NueXini/NueXini_Packages.git" HEAD:main
+        git push --quiet "https://${{ secrets.TOKEN }}@github.com/ysx66/openwrt-packages.git" HEAD:main
  
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@v1.2.3
