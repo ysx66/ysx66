@@ -3,15 +3,6 @@ name: Build-x86
 on:
 #  repository_dispatch:
    workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions'
-        required: false
-        default: "false"
-        type: choice
-        options:
-          - false
-          - true
    schedule:
      - cron: 0 20 * * *
 
@@ -22,7 +13,6 @@ env:
   CONFIG_FILE: configs/x86.config
   DIY_P1_SH: configs/diy-part1.sh
   DIY_P2_SH: configs/diy-x86.sh
-  UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
   FILE_NAME: OpenWrt-x86
@@ -93,10 +83,6 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-        
-    - name: SSH链接管理
-      uses: P3TERX/ssh2actions@v1.0.0
-      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
 
     - name: Download package
       id: package

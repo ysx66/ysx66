@@ -64,7 +64,7 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
-        Author=$(git show -s --date=short --format="%an")
+        Author=TIAmo
         Date=$(git show -s --date=short --format="%ci")
         Commit=$(git show -s --date=short --format="%s")
         Hash=$(git show -s --date=short --format="%H")
