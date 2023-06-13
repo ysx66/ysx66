@@ -15,13 +15,15 @@ mv -n `find $1/* -maxdepth 0 -type d` ./
 rm -rf $1
 }
 
+git clone https://github.com/jerrykuku/luci-theme-argon
+git clone https://github.com/jerrykuku/luci-app-argon-config
 git clone --depth=1 https://github.com/kiddin9/luci-app-dnsfilter
 git clone --depth=1 https://github.com/kiddin9/qBittorrent-Enhanced-Edition
 git clone --depth=1 https://github.com/yaof2/luci-app-ikoolproxy
 git clone --depth=1 https://github.com/tty228/luci-app-serverchan
 git clone --depth=1 https://github.com/ntlf9t/luci-app-easymesh
 git clone --depth=1 https://github.com/zzsj0928/luci-app-pushbot
-git clone --depth=1 https://github.com/jerrykuku/luci-app-vssr
+git clone https://github.com/jerrykuku/luci-app-vssr
 git clone --depth=1 https://github.com/jerrykuku/lua-maxminddb
 git clone --depth=1 https://github.com/sirpdboy/luci-app-advanced
 git clone --depth=1 https://github.com/hubbylei/luci-app-clash
@@ -73,6 +75,7 @@ git_sparse_clone openwrt-18.06 "https://github.com/immortalwrt/luci" "luci" appl
 applications/luci-app-aliddns applications/luci-app-gost applications/luci-app-iptvhelper
 
 git_sparse_clone main "https://github.com/haiibo/packages" "packages" luci-app-wrtbwmon wrtbwmon luci-app-onliner \
+git_sparse_clone master "https://github.com/kiddin9/openwrt-packages" "openwrt-packages" ffmpeg-remux \
 
 rm -rf ./*/.* & rm -rf ./*/LICENSE
 find -type f -name '*.md' -print -exec rm -rf {} \;

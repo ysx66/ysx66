@@ -24,6 +24,7 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "github-actions[bot]"
         sudo timedatectl set-timezone "Asia/Shanghai"
+        
     - name: Update Packages
       run: |
         cd $GITHUB_WORKSPACE
@@ -34,6 +35,7 @@ jobs:
         rm -rf `find ./* -maxdepth 0 -type d ! -name "diy"` >/dev/null 2>&1
         $GITHUB_WORKSPACE/$SCRIPT
         echo "FILE_PATH=$PWD" >> $GITHUB_ENV
+        
     - name: Upload Packages
       run: |
         [ -e $GITHUB_WORKSPACE/README.md ] && cp $GITHUB_WORKSPACE/README.md $FILE_PATH
