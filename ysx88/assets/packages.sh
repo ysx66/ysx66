@@ -31,7 +31,7 @@ git clone --depth=1 https://github.com/Jason6111/luci-app-netdata
 git clone --depth=1 https://github.com/esirplayground/luci-app-poweroff
 git clone --depth=1 -b lede https://github.com/pymumu/luci-app-smartdns
 git clone --depth=1 https://github.com/pymumu/openwrt-smartdns smartdns
-git clone https://github.com/Hyy2001X/AutoBuild-Packages && rm -rf AutoBuild-Packages/luci-app-adguardhome && mvdir AutoBuild-Packages
+svn co https://github.com/immortalwrt/packages/trunk/net/adguardhome
 git clone --depth=1 https://github.com/peter-tank/luci-app-autorepeater
 git clone --depth=1 https://github.com/sensec/luci-app-udp2raw
 git clone --depth=1 https://github.com/sensec/openwrt-udp2raw udp2raw
