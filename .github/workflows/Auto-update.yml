@@ -27,7 +27,7 @@ jobs:
       run: |
         sudo timedatectl set-timezone "$TZ"
         pwd
-        rm -rfv *
+        rm -rfv !(README.md)
         svn export https://github.com/ysx88/compile-kernel/trunk/ ./compile-kernel
         svn export https://github.com/ysx88/flippy-openwrt-actions/trunk/ ./flippy-openwrt-actions
         svn export https://github.com/ysx88/openwrt-packages/trunk/ ./openwrt-packages
