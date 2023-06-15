@@ -4,6 +4,48 @@ on:
   repository_dispatch:
   workflow_dispatch:
     inputs:
+      kernel_source:
+        description: "Select the kernel source"
+        required: false
+        default: "unifreq/linux-5.10.y-rk35xx"
+        type: choice
+        options:
+          - unifreq/linux-5.10.y-rk35xx
+      kernel_version:
+        description: "Select kernel version"
+        required: false
+        default: "5.10.1"
+        type: choice
+        options:
+          - 5.10.1
+      kernel_auto:
+        description: "Auto use the latest kernel"
+        required: false
+        default: true
+        type: boolean
+      kernel_package:
+        description: "Select compile package list"
+        required: false
+        default: "all"
+        type: choice
+        options:
+          - all
+          - dtbs
+      kernel_toolchain:
+        description: "Select the compilation toolchain"
+        required: false
+        default: "gcc"
+        type: choice
+        options:
+          - gcc
+      kernel_sign:
+        description: "Set the kernel custom signature"
+        required: false
+        default: "-rk3588"
+        type: choice
+        options:
+          - -rk3588
+          - -yourname
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
@@ -13,15 +55,9 @@ on:
           - configs/rk3588
           - false
   schedule:
-    - cron: 15 21 * * *
+    - cron: 30 01 * * *
 
 env:
-  KERNEL_SOURCE: unifreq/linux-5.10.y-rk35xx
-  KERNEL_VERSION: 5.10.1
-  KERNEL_TOOLCHAIN: gcc
-  KERNEL_SIGN: -rk3588
-  KERNEL_PACKAGE: all
-  KERNEL_AUTO: true
   TZ: Asia/Shanghai
 
 jobs:
@@ -74,3 +110,21 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           body: |
             - 这是 `Rockchip rk3588` 专用内核，和其他系列不通用。
+            
+      - name: Telegram notification
+        run: |
+          MSG="
+          🌺${{ env.PRODUCT_NAME }}编译完成
+          开始时间：${{ env.DATE }}
+          完成时间：${{ env.DATE1 }}
+          编译耗时：${{ env.time }}
+          🎈🎈🎈 更新信息 🎈🎈🎈
+          作者: ${{ env.author }}
+          时间: ${{ env.date }}
+          内容: ${{ env.commit }}
+          hash: ${{ env.hash }}
+          ✪ ✣ ✤ ✥ ✦ ❉ ❦ ❧ ❃ ❂ ❁ ❀
+          📍: https://github.com/ysx88/kernel/releases/tag/${{ env.PRODUCT_NAME }}
+          "
+          curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=${MSG}"
+

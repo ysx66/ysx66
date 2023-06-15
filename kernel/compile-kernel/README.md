@@ -76,7 +76,7 @@ sudo apt-get install -y $(cat compile-kernel/tools/script/ubuntu2204-build-armbi
 uses: YOUR-REPO/amlogic-s9xxx-armbian@main
 ```
 
-- ### Input Parameters for GitHub Action
+- ### Input Parameters for GitHub Action.
 
 Related parameters correspond to the `Local Compilation Command`, please refer to the above instructions.
 
@@ -108,7 +108,7 @@ Uploading to `Releases` requires adding `GITHUB_TOKEN` and `GH_TOKEN` to the rep
 
 This kernel can be used on `Armbian` and `OpenWrt` systems. Taking ophub's project as an example, the following will explain how to integrate it when compiling Armbian firmware and how to install and use it in existing systems.
 
-### Using the Kernel to Compile Armbian Firmware
+### Using the Kernel to Compile Armbian Firmware .
 
 Compiling Armbian firmware supports localization operations and can also be compiled online using `github.com`'s Actions. The usage method for local compilation is detailed in: [Local Packaging](../README.md#local-build-instructions), and the method for compiling online using Actions is detailed in: [Compiling using GitHub Actions](../README.md#github-actions-input-parameter-description).
 

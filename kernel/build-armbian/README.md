@@ -18,6 +18,6 @@ This directory contains Armbian usage documentation.
 
 Create a folder corresponding to the version number in the `kernel` directory, such as `stable/5.10.125`. Create directories for multiple kernels and place the corresponding kernel files in them. Kernel files can be downloaded from the [kernel](https://github.com/ophub/kernel) repository or [custom compiled](../compile-kernel). If no manual download of kernel files is found, the script will automatically download them from the kernel repository during compilation.
 
-## u-boot
+## u-boot .
 
-These are the system's boot files. Depending on the version of the kernel, they will be automatically installed/updated by related scripts when needed.
+These are the system's boot files. Depending on the version of the kernel. they will be automatically installed/updated by related scripts when needed.
