@@ -1,0 +1,118 @@
+CONFIG_TARGET_rockchip=y
+CONFIG_TARGET_rockchip_armv8=y
+CONFIG_TARGET_rockchip_armv8_DEVICE_friendlyarm_nanopi-r2s=y
+CONFIG_NODEJS_ICU_SMALL=y
+CONFIG_PACKAGE_UnblockNeteaseMusic=y
+CONFIG_PACKAGE_UnblockNeteaseMusic-Go=y
+CONFIG_PACKAGE_adbyby=y
+CONFIG_PACKAGE_bash=y
+# CONFIG_PACKAGE_chinadns-ng is not set
+# CONFIG_PACKAGE_coreutils-base64 is not set
+CONFIG_PACKAGE_coreutils-nohup=y
+# CONFIG_PACKAGE_dns2socks is not set
+# CONFIG_PACKAGE_dns2tcp is not set
+CONFIG_PACKAGE_ffmpeg-remux=y
+CONFIG_PACKAGE_hostapd-common=y
+CONFIG_PACKAGE_kmod-inet-diag=y
+CONFIG_PACKAGE_libbz2=y
+CONFIG_PACKAGE_libcap-bin=y
+CONFIG_PACKAGE_libcap-bin-capsh-shell="/bin/sh"
+CONFIG_PACKAGE_libcares=y
+# CONFIG_PACKAGE_libev is not set
+CONFIG_PACKAGE_libgmp=y
+CONFIG_PACKAGE_libnetsnmp=y
+CONFIG_PACKAGE_libpci=y
+CONFIG_PACKAGE_libreadline=y
+CONFIG_PACKAGE_libruby=y
+# CONFIG_PACKAGE_libsodium is not set
+CONFIG_PACKAGE_libstdcpp=y
+# CONFIG_PACKAGE_libudns is not set
+CONFIG_PACKAGE_libyaml=y
+CONFIG_PACKAGE_linkease=y
+# CONFIG_PACKAGE_lua-neturl is not set
+# CONFIG_PACKAGE_luci-app-accesscontrol is not set
+CONFIG_PACKAGE_luci-app-adbyby-plus=y
+CONFIG_PACKAGE_luci-app-adguardhome=y
+CONFIG_PACKAGE_luci-app-argon-config=y
+# CONFIG_PACKAGE_luci-app-ddns is not set
+CONFIG_PACKAGE_luci-app-linkease=y
+CONFIG_PACKAGE_luci-app-onliner=y
+CONFIG_PACKAGE_luci-app-openclash=y
+# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Haproxy is not set
+# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_ShadowsocksR_Libev_Client is not set
+# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Libev_Client is not set
+# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Client is not set
+# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Simple_Obfs is not set
+# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_V2ray_Plugin is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Haproxy is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Server is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Simple_Obfs is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
+# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray is not set
+# CONFIG_PACKAGE_luci-app-qbittorrent-simple_dynamic is not set
+CONFIG_PACKAGE_luci-app-qbittorrent-simple_static=y
+# CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-ng is not set
+# CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-webui is not set
+# CONFIG_PACKAGE_luci-app-ssr-plus is not set
+# CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ChinaDNS_NG is not set
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NONE_V2RAY=y
+# CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server=y
+# CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client is not set
+# CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server is not set
+# CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Simple_Obfs is not set
+# CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
+# CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_PDNSD is not set
+CONFIG_PACKAGE_luci-app-unblockmusic=y
+CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_NodeJS=y
+# CONFIG_PACKAGE_luci-app-upnp is not set
+# CONFIG_PACKAGE_luci-app-vsftpd is not set
+# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_ShadowsocksR_Libev_Server is not set
+# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan is not set
+# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray is not set
+# CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray_plugin is not set
+# CONFIG_PACKAGE_luci-app-webd_INCLUDE_WEBD_BINARY is not set
+CONFIG_PACKAGE_luci-compat=y
+CONFIG_PACKAGE_luci-i18n-adbyby-plus-zh-cn=y
+CONFIG_PACKAGE_luci-i18n-argon-config-zh-cn=y
+CONFIG_PACKAGE_luci-i18n-linkease-zh-cn=y
+CONFIG_PACKAGE_luci-i18n-unblockmusic-zh-cn=y
+# CONFIG_PACKAGE_luci-lib-ipkg is not set
+# CONFIG_PACKAGE_microsocks is not set
+# CONFIG_PACKAGE_miniupnpd is not set
+CONFIG_PACKAGE_node=y
+CONFIG_PACKAGE_openssh-sftp-server=y
+# CONFIG_PACKAGE_pdnsd-alt is not set
+# CONFIG_PACKAGE_resolveip is not set
+CONFIG_PACKAGE_ruby=y
+CONFIG_PACKAGE_ruby-bigdecimal=y
+CONFIG_PACKAGE_ruby-date=y
+CONFIG_PACKAGE_ruby-digest=y
+CONFIG_PACKAGE_ruby-enc=y
+CONFIG_PACKAGE_ruby-forwardable=y
+CONFIG_PACKAGE_ruby-pstore=y
+CONFIG_PACKAGE_ruby-psych=y
+CONFIG_PACKAGE_ruby-stringio=y
+CONFIG_PACKAGE_ruby-strscan=y
+CONFIG_PACKAGE_ruby-yaml=y
+# CONFIG_PACKAGE_shadowsocks-rust-sslocal is not set
+# CONFIG_PACKAGE_shadowsocks-rust-ssserver is not set
+# CONFIG_PACKAGE_shadowsocksr-libev-ssr-check is not set
+# CONFIG_PACKAGE_shadowsocksr-libev-ssr-local is not set
+# CONFIG_PACKAGE_shadowsocksr-libev-ssr-redir is not set
+# CONFIG_PACKAGE_simple-obfs-client is not set
+CONFIG_PACKAGE_snmpd=y
+# CONFIG_PACKAGE_tcping is not set
+CONFIG_PACKAGE_unzip=y
+# CONFIG_PACKAGE_vsftpd-alt is not set
+CONFIG_PACKAGE_wpa-cli=y
+CONFIG_PACKAGE_wpad-basic=y
+# CONFIG_PACKAGE_xray-core is not set
+CONFIG_TARGET_ROOTFS_PARTSIZE=950
+CONFIG_WPA_MSG_MIN_PRIORITY=3
