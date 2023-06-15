@@ -48,11 +48,11 @@ chroot_generate_uinitrd() {
     [[ -f "${initramfs_conf}" ]] && sed -i "s|^update_initramfs=.*|update_initramfs=yes|g" ${initramfs_conf}
 
     # Generate uInitrd file directly under armbian system
-    update-initramfs -c -k ${chroot_kernel_version}
+    update-initramfs -c -k ${chroot_kernel_version} 2>/dev/null
 
     if [[ -f "uInitrd" ]]; then
         echo -e "${SUCCESS} The initrd.img and uInitrd file is Successfully generated."
-        [[ ! -L "uInitrd" ]] && mv -vf uInitrd uInitrd-${chroot_kernel_version}
+        mv -f uInitrd uInitrd-${chroot_kernel_version} 2>/dev/null
         sync && sleep 3
     else
         echo -e "${WARNING} The initrd.img and uInitrd file not updated."

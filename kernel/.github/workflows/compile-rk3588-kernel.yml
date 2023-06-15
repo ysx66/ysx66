@@ -1,3 +1,9 @@
+#==========================================================================
+# Description: Compile rk3588 kernel
+# Copyright (C) 2023 https://github.com/unifreq/linux-5.10.y-rk35xx
+# Copyright (C) 2023 https://github.com/ophub/kernel
+#==========================================================================
+
 name: Compile rk3588 kernel
 
 on:
@@ -49,16 +55,14 @@ on:
       kernel_config:
         description: "Set the path of kernel .config"
         required: false
-        default: "configs/rk3588"
+        default: "compile-kernel/rk3588"
         type: choice
         options:
-          - configs/rk3588
+          - compile-kernel/rk3588
           - false
-  schedule:
-    - cron: 30 01 * * *
 
 env:
-  TZ: Asia/Shanghai
+  TZ: America/New_York
 
 jobs:
   build:
@@ -79,7 +83,7 @@ jobs:
           sudo rm -rf /usr/share/dotnet /etc/apt/sources.list.d /usr/local/lib/android 2>/dev/null
           sudo -E apt-get -y update
           sudo -E apt-get -y purge azure-cli ghc* zulu* llvm* firefox google* dotnet* powershell openjdk* mongodb* moby* || true
-          sudo -E apt-get -y install $(curl -fsSL https://raw.githubusercontent.com/ysx88/OpenWrt/main/ubuntu2204-build-armbian-depends)
+          sudo -E apt-get -y install $(curl -fsSL https://is.gd/depend_ubuntu2204_armbian)
           sudo -E systemctl daemon-reload
           #sudo -E apt-get -y full-upgrade
           sudo -E apt-get -y autoremove --purge
@@ -109,22 +113,8 @@ jobs:
           allowUpdates: true
           token: ${{ secrets.GH_TOKEN }}
           body: |
+            - The kernel can be used to compile Armbian and OpenWrt.
+            - The kernel source code comes from: ${{ inputs.kernel_source }}
+            - The kernel compilation toolchain: ${{ inputs.kernel_toolchain }}
+            - This is a dedicated kernel for `Rockchip rk3588` and is not compatible with other series.
             - 这是 `Rockchip rk3588` 专用内核，和其他系列不通用。
-            
-      - name: Telegram notification
-        run: |
-          MSG="
-          🌺${{ env.PRODUCT_NAME }}编译完成
-          开始时间：${{ env.DATE }}
-          完成时间：${{ env.DATE1 }}
-          编译耗时：${{ env.time }}
-          🎈🎈🎈 更新信息 🎈🎈🎈
-          作者: ${{ env.author }}
-          时间: ${{ env.date }}
-          内容: ${{ env.commit }}
-          hash: ${{ env.hash }}
-          ✪ ✣ ✤ ✥ ✦ ❉ ❦ ❧ ❃ ❂ ❁ ❀
-          📍: https://github.com/ysx88/kernel/releases/tag/${{ env.PRODUCT_NAME }}
-          "
-          curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=${MSG}"
-

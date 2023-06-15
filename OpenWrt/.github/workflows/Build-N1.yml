@@ -49,7 +49,7 @@ jobs:
       run: |
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
-        sudo -E apt-get -qq install $(curl -fsSL https://raw.githubusercontent.com/ysx88/OpenWrt/main/ubuntu2204-make-openwrt-depends)
+        sudo -E apt-get -qq install $(curl -fsSL https://raw.githubusercontent.com/ysx88/ysx88/main/assets/ubuntu2204-make-openwrt-depends)
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
@@ -152,3 +152,12 @@ jobs:
               IP地址:192.168.71.4
               用户名：root
               密码：password
+              
+      - name: Telegram notification
+        run: |
+          MSG="
+          🌺${{ env.PRODUCT_NAME }}编译完成
+          ✪ ✣ ✤ ✥ ✦ ❉ ❦ ❧ ❃ ❂ ❁ ❀
+          📍: https://github.com/ysx88/OpenWrt/releases/tag/${{ env.PRODUCT_NAME }}
+          "
+          curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=${MSG}"

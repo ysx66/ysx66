@@ -16,7 +16,7 @@ git clone https://github.com/jerrykuku/luci-app-argon-config package/luci-app-ar
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
 
 # 更改 Argon 主题背景
-cp -f $GITHUB_WORKSPACE/configs/jpg2023.jpg package/luci-theme-argon/htdocs/luci-static/argon/img/jpg2023.jpg
+cp -f $GITHUB_WORKSPACE/configs/bg1.jpg package/luci-theme-argon/htdocs/luci-static/argon/img/bg1.jpg
 
 # 晶晨宝盒
 sed -i "s|https.*/amlogic-s9xxx-openwrt|https://github.com/ysx88/OpenWrt|g" package/luci-app-amlogic/root/etc/config/amlogic

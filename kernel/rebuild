@@ -88,7 +88,6 @@ specific_tags="${default_tags}"
 stable_kernel=("6.1.1" "5.15.1")
 flippy_kernel=("6.1.1" "5.15.1")
 dev_kernel=("6.1.1" "5.15.1")
-beta_kernel=("6.1.1" "5.15.1")
 rk3588_kernel=("5.10.1")
 # Set to automatically use the latest kernel
 auto_kernel="true"
@@ -198,13 +197,12 @@ init_var() {
             ;;
         -k | --Kernel)
             if [[ -n "${2}" ]]; then
-                oldIFS="${IFS}"
-                IFS="_"
+                oldIFS=${IFS}
+                IFS=_
                 flippy_kernel=(${2})
                 stable_kernel=(${2})
                 dev_kernel=(${2})
-                beta_kernel=(${2})
-                IFS="${oldIFS}"
+                IFS=${oldIFS}
                 shift
             else
                 error_msg "Invalid -k parameter [ ${2} ]!"
@@ -271,7 +269,7 @@ check_data() {
             cat ${model_conf} |
                 sed -e 's/NA//g' -e 's/NULL//g' -e 's/[ ][ ]*//g' |
                 grep -E "^[^#].*:yes$" | awk -F':' '{print $13}' |
-                sort -u | xargs
+                sort | uniq | xargs
         ))
     else
         board_list=":($(echo ${build_board} | sed -e 's/_/\|/g')):(yes|no)"
@@ -284,7 +282,7 @@ check_data() {
         cat ${model_conf} |
             sed -e 's/NA//g' -e 's/NULL//g' -e 's/[ ][ ]*//g' -e 's/\.y/\.1/g' |
             grep -E "^[^#].*${board_list}$" | awk -F':' '{print $9}' |
-            sort -u | xargs
+            sort | uniq | xargs
     ))
     [[ "${#kernel_from[*]}" -eq "0" ]] && error_msg "Missing [ KERNEL_TAGS ] settings, stop building."
     # Replace custom kernel tags
@@ -294,10 +292,10 @@ check_data() {
     }
 
     # The [ specific kernel ], Use the [ kernel version number ], such as 5.15.y, 6.1.y, etc. download from [ kernel_stable ].
-    specific_kernel=($(echo ${kernel_from[*]} | sed -e 's/[ ][ ]*/\n/g' | grep -E "^[0-9]+" | sort -u | xargs))
+    specific_kernel=($(echo ${kernel_from[*]} | sed -e 's/[ ][ ]*/\n/g' | grep -E "^[0-9]+" | sort | uniq | xargs))
 
     # The [ suffix ] of KERNEL_TAGS starts with a [ letter ], such as kernel_stable, kernel_rk3588, etc.
-    tags_list=($(echo ${kernel_from[*]} | sed -e 's/[ ][ ]*/\n/g' | grep -E "^[a-z]" | sort -u | xargs))
+    tags_list=($(echo ${kernel_from[*]} | sed -e 's/[ ][ ]*/\n/g' | grep -E "^[a-z]" | sort | uniq | xargs))
     # Add the specific kernel to the list
     [[ "${#specific_kernel[*]}" -ne "0" ]] && tags_list=(${tags_list[*]} "specific")
     # Check the kernel list
@@ -353,9 +351,6 @@ query_kernel() {
                 ;;
             dev)
                 down_kernel_list=(${dev_kernel[*]})
-                ;;
-            beta)
-                down_kernel_list=(${beta_kernel[*]})
                 ;;
             rk3588)
                 down_kernel_list=(${rk3588_kernel[*]})
@@ -424,10 +419,6 @@ query_kernel() {
                 unset dev_kernel
                 dev_kernel=(${tmp_arr_kernels[*]})
                 ;;
-            beta)
-                unset beta_kernel
-                beta_kernel=(${tmp_arr_kernels[*]})
-                ;;
             rk3588)
                 unset rk3588_kernel
                 rk3588_kernel=(${tmp_arr_kernels[*]})
@@ -479,9 +470,6 @@ download_kernel() {
             dev)
                 down_kernel_list=(${dev_kernel[*]})
                 ;;
-            beta)
-                down_kernel_list=(${beta_kernel[*]})
-                ;;
             rk3588)
                 down_kernel_list=(${rk3588_kernel[*]})
                 ;;
@@ -503,7 +491,7 @@ download_kernel() {
                     wget "${kernel_down_from}" -q -P "${kernel_path}/${kd}"
                     [[ "${?}" -ne "0" ]] && error_msg "Failed to download the kernel files from the server."
 
-                    tar -mxzf "${kernel_path}/${kd}/${kernel_var}.tar.gz" -C "${kernel_path}/${kd}"
+                    tar -xf "${kernel_path}/${kd}/${kernel_var}.tar.gz" -C "${kernel_path}/${kd}"
                     [[ "${?}" -ne "0" ]] && error_msg "[ ${kernel_var} ] kernel decompression failed."
                 else
                     echo -e "${INFO} (${x}.${i}) [ ${k} - ${kernel_var} ] Kernel is in the local directory."
@@ -773,7 +761,7 @@ replace_kernel() {
     [[ -s "${kernel_boot}" && -s "${kernel_dtb}" && -s "${kernel_modules}" && -s "${kernel_header}" ]] || error_msg "The 4 kernel missing."
 
     # 01. For /boot five files
-    tar -mxzf ${kernel_boot} -C ${tag_bootfs}
+    tar -xzf ${kernel_boot} -C ${tag_bootfs}
     [[ "${PLATFORM}" == "amlogic" ]] && (cd ${tag_bootfs} && cp -f uInitrd-${kernel_name} uInitrd && cp -f vmlinuz-${kernel_name} zImage)
     [[ "${PLATFORM}" == "rockchip" ]] && (cd ${tag_bootfs} && ln -sf uInitrd-${kernel_name} uInitrd && ln -sf vmlinuz-${kernel_name} Image)
     [[ "${PLATFORM}" == "allwinner" ]] && (cd ${tag_bootfs} && cp -f uInitrd-${kernel_name} uInitrd && cp -f vmlinuz-${kernel_name} Image)
@@ -782,18 +770,18 @@ replace_kernel() {
 
     # 02. For /boot/dtb/${PLATFORM}/*
     [[ -d "${tag_bootfs}/dtb/${PLATFORM}" ]] || mkdir -p ${tag_bootfs}/dtb/${PLATFORM}
-    tar -mxzf ${kernel_dtb} -C ${tag_bootfs}/dtb/${PLATFORM}
+    tar -xzf ${kernel_dtb} -C ${tag_bootfs}/dtb/${PLATFORM}
     [[ "${PLATFORM}" == "rockchip" ]] && ln -sf dtb ${tag_bootfs}/dtb-${kernel_name}
     [[ "$(ls ${tag_bootfs}/dtb/${PLATFORM} -l 2>/dev/null | grep "^-" | wc -l)" -ge "2" ]] || error_msg "/boot/dtb/${PLATFORM} files is missing."
 
     # 03. For /usr/src/linux-headers-${kernel_name}
     header_path="linux-headers-${kernel_name}"
     rm -rf ${tag_rootfs}/usr/src/linux-headers-* 2>/dev/null && mkdir -p "${tag_rootfs}/usr/src/${header_path}"
-    tar -mxzf ${kernel_header} -C ${tag_rootfs}/usr/src/${header_path}
+    tar -xzf ${kernel_header} -C ${tag_rootfs}/usr/src/${header_path}
     [[ -d "${tag_rootfs}/usr/src/${header_path}/include" ]] || error_msg "/usr/src/${header_path}/include folder is missing."
 
     # 04. For /usr/lib/modules/${kernel_name}
-    tar -mxzf ${kernel_modules} -C ${tag_rootfs}/usr/lib/modules
+    tar -xzf ${kernel_modules} -C ${tag_rootfs}/usr/lib/modules
     (cd ${tag_rootfs}/usr/lib/modules/${kernel_name}/ && rm -f build source 2>/dev/null && ln -sf /usr/src/${header_path} build)
     [[ "$(ls ${tag_rootfs}/usr/lib/modules/${kernel_name} -l 2>/dev/null | grep "^d" | wc -l)" -eq "1" ]] || error_msg "/usr/lib/modules kernel folder is missing."
 }
@@ -1109,9 +1097,6 @@ loop_rebuild() {
             dev)
                 kernel_list=(${dev_kernel[*]})
                 ;;
-            beta)
-                kernel_list=(${beta_kernel[*]})
-                ;;
             rk3588)
                 kernel_list=(${rk3588_kernel[*]})
                 ;;
@@ -1179,7 +1164,7 @@ find_armbian
 # Download the dependency files
 download_depends
 # Query the latest kernel version
-[[ "${auto_kernel}" == "true" || "${auto_kernel}" == "yes" ]] && query_kernel
+[[ "${auto_kernel}" == "true" ]] && query_kernel
 # Download the kernel files
 download_kernel
 
