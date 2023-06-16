@@ -8,7 +8,7 @@
 # This file is a part of the Rebuild Armbian
 # https://github.com/ophub/amlogic-s9xxx-armbian
 #
-# Description: Run on the x86_64 and aarch64 platforms (ubuntu/debian), Compile the kernel.
+# Description: Run on x86_64 Ubuntu-22.04(jammy), Compile the kernel.
 # Copyright (C) 2021~ https://www.kernel.org
 # Copyright (C) 2021~ https://github.com/unifreq
 # Copyright (C) 2021~ https://github.com/ophub/amlogic-s9xxx-armbian
@@ -24,9 +24,8 @@
 # init_var           : Initialize all variables
 # toolchain_check    : Check and install the cross-compilation toolchain
 # query_version      : Query the latest kernel version
-# apply_patch        : Apply custom kernel patches
-# get_kernel_source  : Get the kernel source code
 #
+# get_kernel_source  : Get the kernel source code
 # headers_install    : Deploy the kernel headers file
 # compile_env        : Set up the compile kernel environment
 # compile_dtbs       : Compile the dtbs
@@ -47,14 +46,11 @@ compile_path="${current_path}/compile-kernel"
 kernel_path="${compile_path}/kernel"
 config_path="${compile_path}/tools/config"
 script_path="${compile_path}/tools/script"
-kernel_patch_path="${compile_path}/tools/patch"
 armbian_path="${compile_path}/tools/armbian"
 armbian_file="${armbian_path}/armbian.img"
 out_kernel="${compile_path}/output"
 chroot_path="${out_kernel}/chroot"
 chroot_file="${chroot_path}/chroot_armbian.img"
-
-# Set the system file path to be used
 arch_info="$(uname -m)"
 host_release="$(cat /etc/os-release | grep '^VERSION_CODENAME=.*' | cut -d'=' -f2)"
 
@@ -62,20 +58,15 @@ host_release="$(cat /etc/os-release | grep '^VERSION_CODENAME=.*' | cut -d'=' -f
 repo_owner="unifreq"
 repo_branch="main"
 build_kernel=("6.1.1" "5.15.1")
-# Set whether to use the latest kernel, options: [ true / false ]
 auto_kernel="true"
-# Set whether to apply custom kernel patches, options: [ true / false ]
-auto_patch="false"
-# Set custom signature for the kernel
-custom_name="-ophub"
+custom_name=""
 # Set the kernel compile object, options: [ dtbs / all ]
 package_list="all"
 
 # Cross compile toolchain download mirror
 dev_repo="https://github.com/ophub/kernel/releases/download/dev"
 # Arm GNU Toolchain source: https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads
-gun_file_x86_64="arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-linux-gnu.tar.xz"
-gun_file_aarch64="arm-gnu-toolchain-12.2.rel1-aarch64-aarch64-none-elf.tar.xz"
+gun_file="arm-gnu-toolchain-12.2.rel1-x86_64-aarch64-none-linux-gnu.tar.xz"
 # Armenian file source: https://github.com/ophub/amlogic-s9xxx-armbian/releases
 armbian_rootfs_file="armbian.tar.xz"
 # Set the toolchain path
@@ -127,16 +118,16 @@ init_var() {
     echo -e "${STEPS} Start Initializing Variables..."
 
     # If it is followed by [ : ], it means that the option requires a parameter value
-    get_all_ver="$(getopt "k:a:n:m:p:r:t:" "${@}")"
+    get_all_ver="$(getopt "k:a:n:p:r:t:" "${@}")"
 
     while [[ -n "${1}" ]]; do
         case "${1}" in
         -k | --Kernel)
             if [[ -n "${2}" ]]; then
-                oldIFS="${IFS}"
-                IFS="_"
+                oldIFS=$IFS
+                IFS=_
                 build_kernel=(${2})
-                IFS="${oldIFS}"
+                IFS=$oldIFS
                 shift
             else
                 error_msg "Invalid -k parameter [ ${2} ]!"
@@ -153,23 +144,15 @@ init_var() {
         -n | --customName)
             if [[ -n "${2}" ]]; then
                 custom_name="${2// /}"
-                [[ "${custom_name:0:1}" != "-" ]] && custom_name="-${custom_name}"
+                [[ ${custom_name:0:1} != "-" ]] && custom_name="-${custom_name}"
                 shift
             else
                 error_msg "Invalid -n parameter [ ${2} ]!"
             fi
             ;;
-        -m | --MakePackage)
+        -p | --PackageList)
             if [[ -n "${2}" ]]; then
                 package_list="${2}"
-                shift
-            else
-                error_msg "Invalid -m parameter [ ${2} ]!"
-            fi
-            ;;
-        -p | --AutoPatch)
-            if [[ -n "${2}" ]]; then
-                auto_patch="${2}"
                 shift
             else
                 error_msg "Invalid -p parameter [ ${2} ]!"
@@ -213,12 +196,8 @@ toolchain_check() {
     echo -e "${STEPS} Start checking the toolchain for compiling the kernel..."
 
     # Install dependencies for jammy
-    sudo apt-get -qq update
-    if [[ "${arch_info}" == "x86_64" ]]; then
-        sudo apt-get -qq install -y $(cat compile-kernel/tools/script/ubuntu2204-build-armbian-depends)
-    else
-        sudo apt-get -qq install -y $(cat compile-kernel/tools/script/armbian-compile-kernel-depends)
-    fi
+    apt-get -qq update
+    apt-get -qq install -y $(cat compile-kernel/tools/script/ubuntu2204-build-armbian-depends)
 
     # Download armbian
     if [[ ! -f "${armbian_file}" ]]; then
@@ -239,8 +218,7 @@ toolchain_check() {
     if [[ "${toolchain_name}" == "clang" ]]; then
         # Install LLVM
         echo -e "${INFO} Start installing the LLVM toolchain..."
-        sudo apt-get -qq install -y lsb-release software-properties-common gnupg
-        curl -fsSL https://apt.llvm.org/llvm.sh | sudo bash -s all
+        curl -fsSL https://apt.llvm.org/llvm.sh | bash -s all
         [[ "${?}" -eq "0" ]] || error_msg "LLVM installation failed."
 
         # Set cross compilation parameters
@@ -249,15 +227,6 @@ toolchain_check() {
         export LD="ld.lld"
         export MFLAGS=" LLVM=1 LLVM_IAS=1 "
     else
-        # Choosing Arm GNU Toolchain based on the platform
-        if [[ "${arch_info}" == "x86_64" ]]; then
-            gun_file="${gun_file_x86_64}"
-            gun_bin="aarch64-none-linux-gnu-"
-        else
-            gun_file="${gun_file_aarch64}"
-            gun_bin="aarch64-none-elf-"
-        fi
-
         # Download Arm GNU Toolchain
         [[ -d "${toolchain_path}" ]] || mkdir -p ${toolchain_path}
         if [[ ! -d "${toolchain_path}/${gun_file//.tar.xz/}/bin" ]]; then
@@ -270,12 +239,12 @@ toolchain_check() {
         fi
 
         # Add ${PATH} variable
-        path_os_variable="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
-        path_gcc="${toolchain_path}/${gun_file//.tar.xz/}/bin:${path_os_variable}"
+        path_ubuntu="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
+        path_gcc="${toolchain_path}/${gun_file//.tar.xz/}/bin:${path_ubuntu}"
         export PATH="${path_gcc}"
 
         # Set cross compilation parameters
-        export CROSS_COMPILE="${toolchain_path}/${gun_file//.tar.xz/}/bin/${gun_bin}"
+        export CROSS_COMPILE="${toolchain_path}/${gun_file//.tar.xz/}/bin/aarch64-none-linux-gnu-"
         export CC="${CROSS_COMPILE}gcc"
         export LD="${CROSS_COMPILE}ld.bfd"
         export MFLAGS=""
@@ -316,41 +285,6 @@ query_version() {
     build_kernel="${tmp_arr_kernels[*]}"
 }
 
-apply_patch() {
-    cd ${current_path}
-    echo -e "${STEPS} Start applying custom kernel patches..."
-
-    # Apply the common kernel patches
-    if [[ -d "${kernel_patch_path}/common-kernel-patches" ]]; then
-        echo -e "${INFO} Copy common kernel patches..."
-        cp -vf ${kernel_patch_path}/common-kernel-patches/*.patch -t ${kernel_path}/${local_kernel_path}
-
-        cd ${kernel_path}/${local_kernel_path}
-        for file in *.patch; do
-            echo -e "${INFO} Apply kernel patch file: [ ${file} ]"
-            patch -p1 <"${file}"
-        done
-        rm -f *.patch
-    else
-        echo -e "${INFO} No common kernel patches, skipping."
-    fi
-
-    # Apply the dedicated kernel patches
-    if [[ -d "${kernel_patch_path}/${local_kernel_path}" ]]; then
-        echo -e "${INFO} Copy [ ${local_kernel_path} ] version dedicated kernel patches..."
-        cp -vf ${kernel_patch_path}/${local_kernel_path}/*.patch -t ${kernel_path}/${local_kernel_path}
-
-        cd ${kernel_path}/${local_kernel_path}
-        for file in *.patch; do
-            echo -e "${INFO} Apply kernel patch file: [ ${file} ]"
-            patch -p1 <"${file}"
-        done
-        rm -f *.patch
-    else
-        echo -e "${INFO} No [ ${local_kernel_path} ] version dedicated kernel patches, skipping."
-    fi
-}
-
 get_kernel_source() {
     cd ${current_path}
     echo -e "${STEPS} Start downloading the kernel source code..."
@@ -370,7 +304,7 @@ get_kernel_source() {
         local_makefile_sublevel="$(cat ${local_makefile} | grep -oE "SUBLEVEL =.*" | head -n 1 | grep -oE '[0-9]{1,3}')"
 
         # Local version and server version comparison
-        if [[ "${auto_kernel}" == "true" || "${auto_kernel}" == "yes" ]] && [[ "${kernel_sub}" -gt "${local_makefile_sublevel}" ]]; then
+        if [[ "${auto_kernel}" == "true" && "${kernel_sub}" -gt "${local_makefile_sublevel}" ]]; then
             # Pull the latest source code of the server
             cd ${kernel_path}/${local_kernel_path}
             git checkout ${code_branch} && git reset --hard origin/${code_branch} && git pull
@@ -384,12 +318,6 @@ get_kernel_source() {
             echo -e "${INFO} Use local source code, compile the kernel version [ ${kernel_version} ]."
         fi
     fi
-
-    # Remove the local version number
-    rm -f ${kernel_path}/${local_kernel_path}/localversion
-
-    # Apply custom kernel patches
-    [[ "${auto_patch}" == "true" || "${auto_patch}" == "yes" ]] && apply_patch
 }
 
 headers_install() {
@@ -546,7 +474,7 @@ generate_uinitrd() {
     #echo -e "${INFO} Kernel copy results in the [ ${tag_rootfs}/boot ] directory: \n$(ls -l ${tag_rootfs}/boot) \n"
 
     rm -rf ${tag_rootfs}/usr/lib/modules/*
-    cp -rf ${out_kernel}/modules/lib/modules/${kernel_outname} -t ${tag_rootfs}/usr/lib/modules
+    cp -rf ${out_kernel}/modules/lib/modules/${kernel_outname} ${tag_rootfs}/usr/lib/modules
     #echo -e "${INFO} Kernel copy results in the [ ${tag_rootfs}/usr/lib/modules ] directory: \n$(ls -l ${tag_rootfs}/usr/lib/modules) \n"
 
     # COMPRESS: [ gzip | bzip2 | lz4 | lzma | lzop | xz | zstd ]
@@ -701,26 +629,24 @@ loop_recompile() {
 # Show welcome message
 echo -e "${STEPS} Welcome to compile kernel! \n"
 echo -e "${INFO} Server running on Ubuntu: [ Release: ${host_release} / Host: ${arch_info} ] \n"
-# Check script permission, supports running on the x86_64 and aarch64 platforms (ubuntu/debian)
+# Check script permission, supports running on x86_64 Ubuntu: [ jammy ]
 [[ "$(id -u)" == "0" ]] || error_msg "Please run this script as root: [ sudo ./${0} ]"
-[[ "x86_64 aarch64" == *"${arch_info}"* ]] || error_msg "This script is only supported on the x86_64 and aarch64 platforms."
+[[ "${arch_info}" == "x86_64" ]] || error_msg "Running this tool on non-x86_64 Ubuntu build hosts is not supported."
 
 # Initialize variables
 init_var "${@}"
 # Check and install the toolchain
 toolchain_check
 # Query the latest kernel version
-[[ "${auto_kernel}" == "true" || "${auto_kernel}" == "yes" ]] && query_version
+[[ "${auto_kernel}" == "true" ]] && query_version
 
 # Show compile settings
 echo -e "${INFO} Kernel compilation toolchain: [ ${toolchain_name} ]"
 echo -e "${INFO} Kernel from: [ ${code_owner} ]"
-echo -e "${INFO} Kernel patch: [ ${auto_patch} ]"
 echo -e "${INFO} Kernel Package: [ ${package_list} ]"
 echo -e "${INFO} kernel signature: [ ${custom_name} ]"
 echo -e "${INFO} Latest kernel version: [ ${auto_kernel} ]"
 echo -e "${INFO} Kernel List: [ $(echo ${build_kernel[*]} | xargs) ] \n"
-
 # Show server start information
 echo -e "${INFO} Server space usage before starting to compile: \n$(df -hT ${current_path}) \n"
 

@@ -6,7 +6,7 @@ inputs:
   build_target:
     description: "Select build target: armbian / kernel"
     required: false
-    default: "kernel"
+    default: "armbian"
   # For build armbian -----
   armbian_path:
     description: "Set Armbian file path."
@@ -68,7 +68,7 @@ inputs:
   kernel_sign:
     description: "Set the kernel custom signature"
     required: false
-    default: "-TIAmo"
+    default: ""
   kernel_toolchain:
     description: "Select the compilation toolchain"
     required: false

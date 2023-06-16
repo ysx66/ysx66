@@ -29,19 +29,18 @@ on:
         type: choice
         options:
           - 'stable'
-          - 'dev'
           - 'flippy'
           - 'rk3588'
       rootfs_size:
         description: '设置rootfs大小(单位：MiB)'
         required: true
-        default: '2560'
+        default: '600'
         type: choice
         options:
+          - '600'
           - '2560'
           - '3840'
           - '5120'
-          - '6400'
       auto_kernel:
         description: '是否自动检测最新内核'
         required: true
@@ -65,7 +64,7 @@ on:
     branches:
       - main
     paths:
-      - 'bconfig'
+      - 'build/Lede/relevance/armsrstart'
 
 env:
   GITHUB_LINK: https://github.com/${{github.repository}}
@@ -135,7 +134,7 @@ jobs:
         cp -Rf `find ./ -maxdepth 1 -type d ! -path './openwrt' ! -path './'` openwrt
         cd openwrt
         source build/common/common.sh && Package_amlogic
-        echo "date=$(date "+%Y%m%d%H%M%S")" >> ${GITHUB_ENV}
+        echo "tag=ARMv8" >> ${GITHUB_ENV}
         echo "date_tg=$(date +"%Y.%m%d.%H%M")" >> ${GITHUB_ENV}
          
     - name: 上传固件在 github Artifacts
@@ -150,7 +149,7 @@ jobs:
       uses: ncipollo/release-action@main
       with:
         name: ${{ env.amlogic_model }}
-        tag: ${{ env.date }}
+        tag: ${{ env.tag }}
         token: ${{ secrets.REPO_TOKEN }}
         allowUpdates: true
         artifacts: "${{ env.FIRMWARE_PATH }}/*"
