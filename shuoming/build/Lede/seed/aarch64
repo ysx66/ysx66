@@ -2,7 +2,6 @@ CONFIG_TARGET_armvirt=y
 CONFIG_TARGET_armvirt_64=y
 CONFIG_TARGET_armvirt_64_DEVICE_generic=y
 CONFIG_BRCMFMAC_SDIO=y
-CONFIG_BTRFS_PROGS_ZSTD=y
 CONFIG_DRIVER_11AC_SUPPORT=y
 CONFIG_GNUTLS_ALPN=y
 CONFIG_GNUTLS_ANON=y
@@ -61,8 +60,6 @@ CONFIG_PACKAGE_kmod-inet-diag=y
 CONFIG_PACKAGE_kmod-input-core=y
 CONFIG_PACKAGE_kmod-input-evdev=y
 CONFIG_PACKAGE_kmod-lib-crc32c=y
-CONFIG_PACKAGE_kmod-lib-zlib-deflate=y
-CONFIG_PACKAGE_kmod-lib-zlib-inflate=y
 CONFIG_PACKAGE_kmod-mac80211=y
 CONFIG_PACKAGE_kmod-mmc=y
 # CONFIG_PACKAGE_kmod-nf-conntrack-netlink is not set
