@@ -1,4 +1,4 @@
-name: Build OpenWrt
+name: 编译底包
 
 on:
   repository_dispatch:

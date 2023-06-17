@@ -1,4 +1,4 @@
-name: Build-ARMv8
+name: ARMv8固件
 
 on:
   repository_dispatch:

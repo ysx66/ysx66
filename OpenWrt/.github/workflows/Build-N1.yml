@@ -1,4 +1,4 @@
-name: Build-N1
+name: N1固件
 
 on:
   repository_dispatch:
