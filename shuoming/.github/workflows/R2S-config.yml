@@ -1,12 +1,17 @@
-name: R2S固件
+name: 生成r2s-config
 
 on:
   repository_dispatch:
   workflow_dispatch:
-  schedule:
-    - cron: 0 17 * * *
-  watch:
-     types: started
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - false
+          - true
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -15,10 +20,10 @@ env:
   CONFIG_FILE: rockchip/r2s.config
   DIY_P1_SH: rockchip/diy-part1.sh
   DIY_P2_SH: rockchip/diy-r2s.sh
-  UPLOAD_RELEASE: true
+  UPLOAD_FIRMWARE: true
+  UPLOAD_RELEASE: false
+  CONFIG: r2s
   TZ: Asia/Shanghai
-  FILE_NAME: NanoPi-R2S
-  PRODUCT_NAME: NanoPi-R2S
 
 jobs:
   build:
@@ -86,76 +91,46 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-
-    - name: Download package
-      id: package
+        
+    - name: SSH链接管理
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
+        
+    - name: 提取config
+      id: organize
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         cd openwrt
         make defconfig
-        make download -j8
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
-
-    - name: Compile the firmware
-      id: compile
-      run: |
-        cd openwrt
-        echo -e "$(nproc) thread compile"
-        make -j$(nproc) || make -j1
-        echo "status=success" >> $GITHUB_OUTPUT
-        grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
-        [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
-        echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
-        echo "DATE=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_ENV
-        
-    - name: Check space usage
-      if: (!cancelled())
-      run: df -hT
-
-    - name: Organize files
-      id: organize
-      run: |
-        cd openwrt/bin/targets/*/*
-        rm -rf packages
-        rm -rf config.buildinfo
-        rm -rf feeds.buildinfo
-        rm -rf profiles.json
-        rm -rf sha256sums
-        rm -rf version.buildinfo
-        rm -rf openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-rootfs.tar.gz
-        rm -rf openwrt-rockchip-armv8-friendlyarm_nanopi-r2s.manifest
-        mv openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-squashfs-sysupgrade.img.gz nanopi-r2s-squashfs-sysupgrade.img.gz
-        mv openwrt-rockchip-armv8-friendlyarm_nanopi-r2s-ext4-sysupgrade.img.gz nanopi-r2s-ext4-sysupgrade.img.gz
+        ls -a
+        sudo mkdir ${{ env.CONFIG }}config && sudo cp .config ${{ env.CONFIG }}config/${{ env.CONFIG }}.config
+        cd ${{ env.CONFIG }}config
+        ls
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
+        echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
         
-    - name: Generate release tag
+    - name: 上传config
+      uses: actions/upload-artifact@main
+      if: steps.organize.outputs.status == 'success' && !cancelled()
+      with:
+        name: ${{ env.CONFIG }}_config${{ env.FILE_DATE }}
+        path: ${{ env.FIRMWARE }}
+
+    - name: 生成发布标签
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
-        echo "release_tag=$(date +"%Y.%m.%d")" >> $GITHUB_OUTPUT
-        echo "release_date=$(date +"%Y-%m-%d %H:%M:%S")" >> $GITHUB_OUTPUT
+        echo "::set-output name=release_tag::$(date +"%Y.%m.%d-%H%M")"
         touch release.txt
-        echo "后台地址：192.168.71.3
-              默认密码：password" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
         
-    - name: Upload firmware to release
+    - name: 上传config文件并发布
       uses: softprops/action-gh-release@v1
       if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: ${{ env.FILE_NAME }} ❤️ ${{ env.DATE }}
-        tag_name: ${{ env.FILE_NAME }}
+        tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/*
-        
-    - name: Telegram notification
-      run: |
-        MSG="
-        🌺${{ env.PRODUCT_NAME }}编译完成
-        ✪ ✣ ✤ ✥ ✦ ❉ ❦ ❧ ❃ ❂ ❁ ❀
-        📍: https://github.com/ysx88/OpenWrt/releases/tag/${{ env.PRODUCT_NAME }}
-        "
-        curl "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}&text=${MSG}"
