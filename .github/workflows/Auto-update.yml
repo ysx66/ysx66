@@ -37,6 +37,8 @@ jobs:
         svn export https://github.com/ysx88/OpenWrt/trunk/ ./OpenWrt
         svn export https://github.com/ysx88/ysx88/trunk/ ./ysx88
         svn export https://github.com/ysx88/shuoming/trunk/ ./shuoming
+        svn export https://github.com/ao889/OpenWrt/trunk/ ./openwrt
+        svn export https://github.com/ao889/common/trunk/ ./common
       
     - name: Commit
       run: |
