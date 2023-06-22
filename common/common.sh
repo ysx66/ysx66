@@ -908,7 +908,7 @@ echo "amlogic_model=${amlogic_model}" >> ${GITHUB_ENV}
 echo "amlogic_kernel=${amlogic_kernel}" >> ${GITHUB_ENV}
 echo "auto_kernel=${auto_kernel}" >> ${GITHUB_ENV}
 echo "rootfs_size=${rootfs_size}" >> ${GITHUB_ENV}
-echo "kernel_repo=ophub/kernel" >> ${GITHUB_ENV}
+echo "kernel_repo=ysx88/kernel" >> ${GITHUB_ENV}
 echo "kernel_usage=${kernel_usage}" >> ${GITHUB_ENV}
 [[ -f "${GITHUB_ENV}" ]] && source ${GITHUB_ENV}
 

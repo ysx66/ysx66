@@ -1,6 +1,3 @@
-- 《[Telegram聊天吹水群](https://t.me/heiheiheio)》- 《[Telegram中文设置方法](https://github.com/danshui-git/shuoming/blob/master/tele.md)》
-
-
 - # 介绍
 
 - 编译amlogic系列，《[自动打包您所需的固件说明](https://github.com/danshui-git/shuoming/blob/master/Amlogic.md)》
@@ -56,27 +53,3 @@
 - 《[编译出错时查看日志方法](https://github.com/danshui-git/shuoming/blob/master/errors.md)》
 - 《[修改文件跟删除仓库](https://github.com/danshui-git/shuoming/blob/master/%E5%88%A0%E9%99%A4%E5%92%8C%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6.md)》
 
-#
-#
-- ## 鸣谢
-- [coolsnowwolf](https://github.com/coolsnowwolf/lede.git)
-- [Lienol](https://github.com/Lienol/openwrt.git)
-- [ctcgfw](https://github.com/project-openwrt/openwrt.git)
-- [P3TERX](https://github.com/P3TERX/Actions-OpenWrt)
-- [tuanqing](https://github.com/tuanqing/mknop)
-- [Hyy2001X](https://github.com/Hyy2001X/AutoBuild-Actions)
-- [ophub](https://github.com/ophub/amlogic-s9xxx-openwrt)
-- [nicholas-opensource](https://github.com/nicholas-opensource/OpenWrt-Autobuild)
-- [hx210](https://github.com/hx210/build-actions)
-- <a href="#/README.md">hyird</a>
-- <a href="#/README.md">World Peace</a>
-- [github平台](https://github.com/)
-- <a href="#/README.md">感谢各位大佬提供的各种各样的插件</a>
-- <a href="#/README.md">感谢各位帮助过我的人，祝福各位好人一生平安</a>
-
-#
-- # 捐赠
-- 如果你觉得此项目对你有帮助，请请我喝一杯82年的凉白开，感谢！
-
--微信-
-# <img src="https://github.com/danshui-git/shuoming/blob/master/doc/weixin4.png" />
