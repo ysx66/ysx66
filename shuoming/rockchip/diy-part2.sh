@@ -26,11 +26,6 @@ sed -i "s|https.*/amlogic-s9xxx-openwrt|https://github.com/ysx88/ysx88|g" packag
 sed -i "s|http.*/library|https://github.com/ysx88/ysx88|g" package/luci-app-amlogic/root/etc/config/amlogic
 sed -i "s|NanoPi-R2S|g" package/luci-app-amlogic/root/etc/config/amlogic
 
-# alist
-git clone https://github.com/sbwml/luci-app-alist package/alist
-rm -rf feeds/packages/lang/golang
-svn export https://github.com/sbwml/packages_lang_golang/branches/19.x feeds/packages/lang/golang
-
 mkdir -p files/etc/openclash/core
 
 CLASH_DEV_URL="https://raw.githubusercontent.com/vernesong/OpenClash/core/master/dev/clash-linux-arm64.tar.gz"

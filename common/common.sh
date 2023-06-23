@@ -1725,7 +1725,7 @@ for X in $(cat ${CLEAR_PATH} |sed "s/.*${TARGET_BOARD}//g"); do
 done
 
 if [[ `ls -1 | grep -c "armvirt"` -eq '0' ]]; then
-  rename -v "s/^openwrt/${Gujian_Date}-${SOURCE}-${LUCI_EDITION}-${LINUX_KERNEL}/" *
+  rename -v "s/^openwrt/" *
 fi
 sudo rm -rf "${CLEAR_PATH}"
 }

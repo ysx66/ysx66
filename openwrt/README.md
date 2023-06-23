@@ -123,27 +123,6 @@ CONFIG_TARGET_armsr_armv8_DEVICE_generic=y
 
 ---
 
-<details>
-<summary>✴️本地编译</summary>
-<br>
-<br />
-<br>
-
-《[本地Ubuntu一键编译OpenWrt固件](https://github.com/281677160/bendi)》
-
-《[本地一键提取.config然后在云编译脚本使用](https://github.com/281677160/bendi)》
-
-<br />
-</details>
-
----
-
-《[Telegram中文设置方法](https://github.com/danshui-git/shuoming/blob/master/tele.md)》
-
-</details>
-
----
-
  ### 鸣谢！
  感谢以下各位大佬（排名无分先后）<br />
  
