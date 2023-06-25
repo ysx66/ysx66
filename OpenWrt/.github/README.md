@@ -21,9 +21,8 @@
 - 固件来源：[![Lean](https://img.shields.io/badge/Lede-Lean-ff69b4.svg?style=flat&logo=appveyor)](https://github.com/coolsnowwolf/lede) [![P3TERX](https://img.shields.io/badge/OpenWrt-P3TERX-blueviolet.svg?style=flat&logo=appveyor)](https://github.com/P3TERX/Actions-OpenWrt) [![Flippy](https://img.shields.io/badge/Package-Flippy-orange.svg?style=flat&logo=appveyor)](https://github.com/unifreq/openwrt_packit) [![ysx88](https://img.shields.io/badge/Build-ysx88-32C955.svg?style=flat&logo=appveyor)](https://github.com/ysx88/OpenWrt)
 - 项目使用 Github Actions 拉取 [Lean](https://github.com/coolsnowwolf/lede) 的 Openwrt 源码仓库进行云编译
 - 🔴ARMv8平台 固件默认 IP 地址：`192.168.1.1` 默认密码：`password`
-- 🔴x86[个人版] 固件默认 IP 地址：`192.168.88.2` 默认密码：`password`
-- 🔴R2S[个人版] 固件默认 IP 地址：`192.168.71.3` 默认密码：`password`
-- 🔴Phicomm-N1[个人版] 固件默认 IP 地址：`192.168.71.4` 默认密码：`password`
+- 🔴x86平台 固件默认 IP 地址：`192.168.88.2` 默认密码：`password`
+- 🔴Rockchip 固件默认 IP 地址：`192.168.1.1` 默认密码：`password`
 - 固件集成的所有 ipk 插件全部打包在 Packages 文件中，可以在 [Releases](https://github.com/ysx88/OpenWrt/releases) 内进行下载
 - 项目编译的固件插件为最新版本，最新版插件可能有 BUG，如果之前使用稳定则无需追新
 - 第一次使用请采用全新安装，避免出现升级失败以及其他一些可能的 BUG
@@ -32,7 +31,7 @@
 ## 固件特色 [![](https://img.shields.io/badge/-本项目固件特色-FFFFFF.svg)](#固件特色-)
 1. 固件每天定时自动编译，以确保获得最新体验
 7. 集成在线用户插件，可查看所有在线用户 IP 地址与实时速率等
-8. ARMv8、Phicomm-N1固件内置晶晨宝盒，支持在线更新固件及内核等
+8. ARMv8固件内置晶晨宝盒，支持在线更新固件及内核等
 
 
 ## 固件下载 [![](https://img.shields.io/badge/-编译状态及下载链接-FFFFFF.svg)](#固件下载-)
