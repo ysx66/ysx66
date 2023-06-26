@@ -13,16 +13,17 @@
 <img src="https://img.shields.io/github/forks/ysx88/OpenWrt.svg?style=for-the-badge&color=ff69b4"/>
 <img src="https://img.shields.io/github/license/ysx88/OpenWrt.svg?style=for-the-badge&color=blueviolet"/>
 
-[![](https://img.shields.io/badge/-目录:-696969.svg)](#readme) [![](https://img.shields.io/badge/-项目说明-FFFFFF.svg)](#项目说明-) [![](https://img.shields.io/badge/-固件特色-FFFFFF.svg)](#固件特色-) [![](https://img.shields.io/badge/-固件下载-FFFFFF.svg)](#固件下载-)  [![](https://img.shields.io/badge/-定制固件-FFFFFF.svg)](#定制固件-) [![](https://img.shields.io/badge/-特别提示-FFFFFF.svg)](#特别提示-) 
+[![](https://img.shields.io/badge/-目录:-696969.svg)](#readme) [![](https://img.shields.io/badge/-项目说明-FFFFFF.svg)](#项目说明-) [![](https://img.shields.io/badge/-固件特色-FFFFFF.svg)](#固件特色-) [![](https://img.shields.io/badge/-固件下载-FFFFFF.svg)](#固件下载-)[![](https://img.shields.io/badge/-插件预览-FFFFFF.svg)](#插件预览-)  [![](https://img.shields.io/badge/-定制固件-FFFFFF.svg)](#定制固件-) [![](https://img.shields.io/badge/-特别提示-FFFFFF.svg)](#特别提示-) 
 </div>
 
 
 ## 项目说明 [![](https://img.shields.io/badge/-项目基本介绍-FFFFFF.svg)](#项目说明-)
 - 固件来源：[![Lean](https://img.shields.io/badge/Lede-Lean-ff69b4.svg?style=flat&logo=appveyor)](https://github.com/coolsnowwolf/lede) [![P3TERX](https://img.shields.io/badge/OpenWrt-P3TERX-blueviolet.svg?style=flat&logo=appveyor)](https://github.com/P3TERX/Actions-OpenWrt) [![Flippy](https://img.shields.io/badge/Package-Flippy-orange.svg?style=flat&logo=appveyor)](https://github.com/unifreq/openwrt_packit) [![ysx88](https://img.shields.io/badge/Build-ysx88-32C955.svg?style=flat&logo=appveyor)](https://github.com/ysx88/OpenWrt)
 - 项目使用 Github Actions 拉取 [Lean](https://github.com/coolsnowwolf/lede) 的 Openwrt 源码仓库进行云编译
-- 🔴ARMv8平台 固件默认 IP 地址：`192.168.1.1` 默认密码：`password`
 - 🔴x86平台 固件默认 IP 地址：`192.168.88.2` 默认密码：`password`
+- 🔴ARMv8平台 固件默认 IP 地址：`192.168.1.1` 默认密码：`password`
 - 🔴Rockchip 固件默认 IP 地址：`192.168.1.1` 默认密码：`password`
+- 🔴ARMv8平台 固件有 `精简` 和 `PLUS` 两个版本，请根据自己喜好按需下载
 - 固件集成的所有 ipk 插件全部打包在 Packages 文件中，可以在 [Releases](https://github.com/ysx88/OpenWrt/releases) 内进行下载
 - 项目编译的固件插件为最新版本，最新版插件可能有 BUG，如果之前使用稳定则无需追新
 - 第一次使用请采用全新安装，避免出现升级失败以及其他一些可能的 BUG
@@ -39,9 +40,29 @@
 | 平台+设备名称 | 固件编译状态 | 配置文件 | 固件下载 |
 | :-------------: | :-------------: | :-------------: | :-------------: |
 | [![](https://img.shields.io/badge/OpenWrt-X86_64位-32C955.svg?logo=openwrt)](https://github.com/ysx88/OpenWrt/blob/main/.github/workflows/Build-x86.yml) | [![](https://github.com/ysx88/OpenWrt/actions/workflows/Build-x86.yml/badge.svg)](https://github.com/ysx88/OpenWrt/actions/workflows/Build-x86.yml) | [![](https://img.shields.io/badge/编译-配置-orange.svg?logo=apache-spark)](https://github.com/ysx88/OpenWrt/blob/main/configs/x86.config) | [![](https://img.shields.io/badge/下载-链接-blueviolet.svg?logo=hack-the-box)](https://github.com/ysx88/OpenWrt/releases/tag/OpenWrt-x86) |
-| [![](https://img.shields.io/badge/OpenWrt-Phicomm_N1-32C955.svg?logo=openwrt)](https://github.com/ysx88/OpenWrt/blob/main/.github/workflows/Build-N1.yml) | [![](https://github.com/ysx88/OpenWrt/actions/workflows/Build-N1.yml/badge.svg)](https://github.com/ysx88/OpenWrt/actions/workflows/Build-N1.yml) | [![](https://img.shields.io/badge/编译-配置-orange.svg?logo=apache-spark)](https://github.com/ysx88/OpenWrt/blob/main/configs/n1.config) | [![](https://img.shields.io/badge/下载-链接-blueviolet.svg?logo=hack-the-box)](https://github.com/ysx88/OpenWrt/releases/tag/Phicomm-N1) |
-| [![](https://img.shields.io/badge/OpenWrt-ARMv8_平台-32C955.svg?logo=openwrt)](https://github.com/ysx88/OpenWrt/blob/main/.github/workflows/Build-ARMv8.yml) | [![](https://github.com/ysx88/OpenWrt/actions/workflows/Build-ARMv8.yml/badge.svg)](https://github.com/ysx88/OpenWrt/actions/workflows/Build-ARMv8.yml) | [![](https://img.shields.io/badge/编译-配置-orange.svg?logo=apache-spark)](https://github.com/ysx88/OpenWrt/blob/main/configs/n1.config) | [![](https://img.shields.io/badge/下载-链接-blueviolet.svg?logo=hack-the-box)](https://github.com/ysx88/OpenWrt/releases/tag/ARMv8) |
-| [![](https://img.shields.io/badge/OpenWrt-Rockchip_平台-32C955.svg?logo=openwrt)](https://github.com/ysx88/OpenWrt/blob/main/.github/workflows/Build-R2S.yml) | [![](https://github.com/ysx88/OpenWrt/actions/workflows/Build-R2S.yml/badge.svg)](https://github.com/ysx88/OpenWrt/actions/workflows/Build-R2S.yml) | [![](https://img.shields.io/badge/编译-配置-orange.svg?logo=apache-spark)](https://github.com/ysx88/OpenWrt/blob/main/configs/r2s.config) | [![](https://img.shields.io/badge/下载-链接-blueviolet.svg?logo=hack-the-box)](https://github.com/ysx88/OpenWrt/releases/tag/NanoPi-R2S) |
+| [![](https://img.shields.io/badge/OpenWrt-ARMv8_平台-32C955.svg?logo=openwrt)](https://github.com/ysx88/OpenWrt/blob/main/.github/workflows/Build-ARMv8.yml) | [![](https://github.com/ysx88/OpenWrt/actions/workflows/Build-ARMv8.yml/badge.svg)](https://github.com/ysx88/OpenWrt/actions/workflows/Build-ARMv8.yml) | [![](https://img.shields.io/badge/编译-配置-orange.svg?logo=apache-spark)](https://github.com/ysx88/flippy-openwrt-actions/blob/main/configs/config) | [![](https://img.shields.io/badge/下载-链接-blueviolet.svg?logo=hack-the-box)](https://github.com/ysx88/OpenWrt/releases/tag/ARMv8) |
+| [![](https://img.shields.io/badge/OpenWrt-ARMv8_Plus-32C955.svg?logo=openwrt)](https://github.com/ysx88/OpenWrt/blob/main/.github/workflows/Build-ARMv8-PLUS.yml) | [![](https://github.com/ysx88/OpenWrt/actions/workflows/Build-ARMv8.yml/badge.svg)](https://github.com/ysx88/OpenWrt/actions/workflows/Build-ARMv8-PLUS.yml) | [![](https://img.shields.io/badge/编译-配置-orange.svg?logo=apache-spark)](https://github.com/ysx88/flippy-openwrt-actions/blob/main/configs/armv8.config) | [![](https://img.shields.io/badge/下载-链接-blueviolet.svg?logo=hack-the-box)](https://github.com/ysx88/OpenWrt/releases/tag/ARMv8_PLUS) |
+| [![](https://img.shields.io/badge/OpenWrt-Rockchip_平台-32C955.svg?logo=openwrt)](https://github.com/ysx88/OpenWrt/blob/main/.github/workflows/Build-Rockchip.yml) | [![](https://github.com/ysx88/OpenWrt/actions/workflows/Build-Rockchip.yml/badge.svg)](https://github.com/ysx88/OpenWrt/actions/workflows/Build-Rockchip.yml) | [![](https://img.shields.io/badge/编译-配置-orange.svg?logo=apache-spark)](https://github.com/ysx88/OpenWrt/blob/main/configs/rockchip) | [![](https://img.shields.io/badge/下载-链接-blueviolet.svg?logo=hack-the-box)](https://github.com/ysx88/OpenWrt/releases/tag/Rockchip) |
+
+
+## 插件预览 [![](https://img.shields.io/badge/-固件插件及功能预览-FFFFFF.svg)](#插件预览-)
+<details>
+<summary><b>&nbsp;ARMv8 盒子 Mini 精简版本插件预览</b></summary>
+<br/>
+<img src="https://cdn.jsdelivr.net/gh/haiibo/OpenWrt/images/mini.png"/>
+</details>
+
+<details>
+<summary><b>&nbsp;ARMv8 盒子 Plus 多功能版插件预览</b></summary>
+<br/>
+<img src="https://cdn.jsdelivr.net/gh/haiibo/OpenWrt/images/plus.png"/>
+</details>
+
+<details>
+<summary><b>&nbsp;X86、R2S、R4S 等软路由插件预览</b></summary>
+<br/>
+<img src="https://cdn.jsdelivr.net/gh/haiibo/OpenWrt/images/mini.png"/>
+</details>
 
 
 ## 定制固件 [![](https://img.shields.io/badge/-项目基本编译教程-FFFFFF.svg)](#定制固件-)
