@@ -20,7 +20,7 @@
 ## 项目说明 [![](https://img.shields.io/badge/-项目基本介绍-FFFFFF.svg)](#项目说明-)
 - 固件来源：[![Lean](https://img.shields.io/badge/Lede-Lean-ff69b4.svg?style=flat&logo=appveyor)](https://github.com/coolsnowwolf/lede) [![P3TERX](https://img.shields.io/badge/OpenWrt-P3TERX-blueviolet.svg?style=flat&logo=appveyor)](https://github.com/P3TERX/Actions-OpenWrt) [![Flippy](https://img.shields.io/badge/Package-Flippy-orange.svg?style=flat&logo=appveyor)](https://github.com/unifreq/openwrt_packit) [![ysx88](https://img.shields.io/badge/Build-ysx88-32C955.svg?style=flat&logo=appveyor)](https://github.com/ysx88/OpenWrt)
 - 项目使用 Github Actions 拉取 [Lean](https://github.com/coolsnowwolf/lede) 的 Openwrt 源码仓库进行云编译
-- 🔴x86平台 固件默认 IP 地址：`192.168.88.2` 默认密码：`password`
+- 🔴x86平台 固件默认 IP 地址：`192.168.1.1` 默认密码：`password`
 - 🔴ARMv8平台 固件默认 IP 地址：`192.168.1.1` 默认密码：`password`
 - 🔴Rockchip 固件默认 IP 地址：`192.168.1.1` 默认密码：`password`
 - 🔴ARMv8平台 固件有 `精简` 和 `PLUS` 两个版本，请根据自己喜好按需下载

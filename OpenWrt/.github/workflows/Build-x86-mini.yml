@@ -145,7 +145,7 @@ jobs:
         removeArtifacts: true
         token: ${{ secrets.GH_TOKEN }}
         body: |
-          * 后台地址：192.168.88.2
+          * 后台地址：192.168.1.1
           默认密码：password
           
     - name: Telegram notification
