@@ -1,4 +1,4 @@
-name: 打包固件-PLUS
+name: ARMv8-PLUS
 
 on:
   repository_dispatch:
