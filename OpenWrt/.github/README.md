@@ -24,6 +24,7 @@
 - 🔴ARMv8平台 固件默认 IP 地址：`192.168.1.1` 默认密码：`password`
 - 🔴Rockchip 固件默认 IP 地址：`192.168.1.1` 默认密码：`password`
 - 🔴ARMv8平台 固件有 `精简` 和 `PLUS` 两个版本，请根据自己喜好按需下载
+- ARMv8 系列固件包含 [F大](https://github.com/unifreq/openwrt_packit) 发布的所有已适配的盒子固件，并提供 Docker 镜像固件[➦使用方法](https://hub.docker.com/r/ysx88/openwrt)
 - 固件集成的所有 ipk 插件全部打包在 Packages 文件中，可以在 [Releases](https://github.com/ysx88/OpenWrt/releases) 内进行下载
 - 项目编译的固件插件为最新版本，最新版插件可能有 BUG，如果之前使用稳定则无需追新
 - 第一次使用请采用全新安装，避免出现升级失败以及其他一些可能的 BUG
