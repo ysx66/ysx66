@@ -12,7 +12,7 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: configs/feeds.conf.default
-  CONFIG_FILE: configs/rockchip
+  CONFIG_FILE: configs/rockchip.config
   DIY_P1_SH: configs/diy-part1.sh
   DIY_P2_SH: configs/rockchip.sh
   UPLOAD_RELEASE: true
