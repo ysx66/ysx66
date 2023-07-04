@@ -259,7 +259,7 @@ if [[ -n "${LUCI_CHECKUT}" ]]; then
 fi
 git pull
 
-sed -i '/281677160/d; /helloworld/d; /passwall/d; /OpenClash/d' "feeds.conf.default"
+sed -i '/ao889/d; /helloworld/d; /passwall/d; /OpenClash/d' "feeds.conf.default"
 cat feeds.conf.default|awk '!/^#/'|awk '!/^$/'|awk '!a[$1" "$2]++{print}' >uniq.conf
 mv -f uniq.conf feeds.conf.default
 
@@ -908,7 +908,7 @@ echo "amlogic_model=${amlogic_model}" >> ${GITHUB_ENV}
 echo "amlogic_kernel=${amlogic_kernel}" >> ${GITHUB_ENV}
 echo "auto_kernel=${auto_kernel}" >> ${GITHUB_ENV}
 echo "rootfs_size=${rootfs_size}" >> ${GITHUB_ENV}
-echo "kernel_repo=ysx88/kernel" >> ${GITHUB_ENV}
+echo "kernel_repo=ophub/kernel" >> ${GITHUB_ENV}
 echo "kernel_usage=${kernel_usage}" >> ${GITHUB_ENV}
 [[ -f "${GITHUB_ENV}" ]] && source ${GITHUB_ENV}
 
@@ -1206,8 +1206,9 @@ if [[ `grep -c "CONFIG_PACKAGE_luci-app-unblockneteasemusic=y" ${HOME_PATH}/.con
   fi
 fi
 
-if [[ `grep -c "CONFIG_TARGET_armvirt_64=y" ${HOME_PATH}/.config` -eq '1' ]]; then
+if [[ `grep -c "CONFIG_TARGET_armvirt=y" ${HOME_PATH}/.config` -eq '1' ]] || [[ `grep -c "CONFIG_TARGET_armsr=y" ${HOME_PATH}/.config` -eq '1' ]]; then
   echo -e "\nCONFIG_TARGET_ROOTFS_TARGZ=y" >> "${HOME_PATH}/.config"
+  sed -i 's/CONFIG_PACKAGE_luci-app-autoupdate=y/# CONFIG_PACKAGE_luci-app-autoupdate is not set/g' ${HOME_PATH}/.config
 fi
 
 if [[ `grep -c "CONFIG_TARGET_x86=y" ${HOME_PATH}/.config` -eq '1' ]] || [[ `grep -c "CONFIG_TARGET_rockchip=y" ${HOME_PATH}/.config` -eq '1' ]] || [[ `grep -c "CONFIG_TARGET_bcm27xx=y" ${HOME_PATH}/.config` -eq '1' ]]; then
@@ -1725,7 +1726,7 @@ for X in $(cat ${CLEAR_PATH} |sed "s/.*${TARGET_BOARD}//g"); do
 done
 
 if [[ `ls -1 | grep -c "armvirt"` -eq '0' ]]; then
-  rename -v "s/^openwrt/" *
+  rename -v "s/^openwrt/${Gujian_Date}-${SOURCE}-${LUCI_EDITION}-${LINUX_KERNEL}/" *
 fi
 sudo rm -rf "${CLEAR_PATH}"
 }
@@ -1954,11 +1955,6 @@ if [[ ${CACHEWRTBUILD_SWITCH} == "true" ]]; then
   TIME y "是否开启缓存加速: 开启"
 else
   TIME r "是否开启缓存加速: 关闭"
-fi
-if [[ ${UPLOAD_WETRANSFER} == "true" ]]; then
-  TIME y "上传固件至【WETRANSFER】: 开启"
-else
-  TIME r "上传固件至【WETRANSFER】: 关闭"
 fi
 if [[ ${COMPILATION_INFORMATION} == "true" ]]; then
   TIME y "编译信息显示: 开启"
