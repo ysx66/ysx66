@@ -1,4 +1,4 @@
-name: NAStool Docker
+name: Build NAStool Image
 on:
   workflow_dispatch:
   push:
@@ -6,11 +6,10 @@ on:
       - master
     paths:
       - version.py
-      - .github/workflows/build.yml
-      - package_list.txt
-      - requirements.txt
       - docker/Dockerfile
-
+      - docker/Dockerfile.lite
+      - .github/workflows/build.yml
+      - requirements.txt
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,11 +41,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - 
-        name: Build Image
+      - name: Build Image
         uses: docker/build-push-action@v2
         with:
-          context: docker
+          context: .
           file: docker/Dockerfile
           platforms: |
             linux/amd64
