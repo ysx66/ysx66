@@ -1,1 +1,1 @@
-# Actions-OpenWrt
+# OpenWrt
