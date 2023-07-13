@@ -38,8 +38,8 @@ jobs:
         svn export https://github.com/ysx88/ysx88/trunk/ ./ysx88
         svn export https://github.com/ysx88/OpenWrt-Docker/trunk/ ./OpenWrt-Docker
         svn export https://github.com/ysx88/nas-tools/trunk/ ./nas-tools
-        svn export https://github.com/ao889/OpenWrt/trunk/ ./openwrt
-        svn export https://github.com/ao889/common/trunk/ ./common
+        svn export https://github.com/ysxhub888/OpenWrt/trunk/ ./openwrt
+        svn export https://github.com/ysxhub888/common/trunk/ ./common
       
     - name: Commit
       run: |
